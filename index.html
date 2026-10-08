@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Real Estate Agent Tools Survey</title>
+<meta name="robots" content="noindex">
+<style>
+  :root {
+    --bg: #f7f6f2;
+    --card: #ffffff;
+    --ink: #1d2327;
+    --muted: #5d676e;
+    --line: #dcd9d0;
+    --accent: #1f5f4a;
+    --accent-ink: #ffffff;
+    --error: #a3321f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #15191a;
+      --card: #1e2425;
+      --ink: #eceae4;
+      --muted: #a2adb2;
+      --line: #364042;
+      --accent: #5fb596;
+      --accent-ink: #0f1a16;
+      --error: #f08b78;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 17px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 28px 16px 64px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  .intro { color: var(--muted); margin: 0 0 24px; }
+  fieldset {
+    border: 1px solid var(--line);
+    background: var(--card);
+    border-radius: 12px;
+    padding: 20px 18px 8px;
+    margin: 0 0 20px;
+  }
+  legend { font-weight: 650; padding: 0 8px; font-size: 1.02rem; }
+  .q { margin: 0 0 22px; }
+  label.q-label { display: block; font-weight: 600; margin-bottom: 6px; }
+  .hint { display: block; font-weight: 400; color: var(--muted); font-size: 0.9rem; margin-top: 2px; }
+  textarea, input[type="text"], input[type="email"], select {
+    width: 100%;
+    font: inherit;
+    color: var(--ink);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  textarea { min-height: 96px; resize: vertical; }
+  textarea:focus, input:focus, select:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+  .row { display: grid; gap: 14px; grid-template-columns: 1fr; }
+  @media (min-width: 560px) { .row.three { grid-template-columns: 1fr 1fr 1fr; } }
+  .check { display: flex; gap: 10px; align-items: flex-start; font-weight: 500; }
+  .check input { margin-top: 5px; width: 18px; height: 18px; flex: none; }
+  button {
+    font: inherit;
+    font-weight: 650;
+    background: var(--accent);
+    color: var(--accent-ink);
+    border: 0;
+    border-radius: 10px;
+    padding: 13px 22px;
+    cursor: pointer;
+    width: 100%;
+  }
+  button:disabled { opacity: 0.6; cursor: wait; }
+  .note { color: var(--muted); font-size: 0.9rem; margin: 12px 0 0; }
+  .error { color: var(--error); font-weight: 600; margin: 12px 0 0; }
+  .done { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 28px 22px; }
+  .hp { position: absolute; left: -9999px; height: 0; width: 0; overflow: hidden; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div id="formView">
+    <h1>Real Estate Agent Tools Survey</h1>
+    <p class="intro">
+      A short survey about how real estate agents work and the tools they use. It takes about 5 to 8 minutes.
+      There are no right or wrong answers, and longer, specific answers are the most useful.
+      Your answers are used for research only. Name and email are optional.
+    </p>
+
+    <form id="survey" novalidate>
+      <div class="hp" aria-hidden="true">
+        <label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+      </div>
+
+      <fieldset>
+        <legend>Your work</legend>
+
+        <div class="q">
+          <label class="q-label" for="time_consuming">
+            Which parts of your work take the most time, or do you enjoy the least?
+          </label>
+          <textarea id="time_consuming" name="time_consuming" maxlength="5000"></textarea>
+        </div>
+
+        <div class="q">
+          <label class="q-label" for="tool_spend">
+            What do you spend the most on in software and tools each month, and roughly how much?
+          </label>
+          <textarea id="tool_spend" name="tool_spend" maxlength="5000"></textarea>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Technology</legend>
+
+        <div class="q">
+          <label class="q-label" for="ai_used">
+            Have you ever used AI for your real estate work? If so, what did you use it for? If not, why not?
+          </label>
+          <textarea id="ai_used" name="ai_used" maxlength="5000"></textarea>
+        </div>
+
+        <div class="q">
+          <label class="q-label" for="ai_tools">
+            Which AI tools have you used?
+            <span class="hint">Skip this if you have not used any.</span>
+          </label>
+          <textarea id="ai_tools" name="ai_tools" maxlength="5000"></textarea>
+        </div>
+
+        <div class="q">
+          <label class="q-label" for="ai_last_use">
+            Describe the last time you used one for work. What did you ask it, and what did you do with the result?
+            <span class="hint">Skip this if you have not used any.</span>
+          </label>
+          <textarea id="ai_last_use" name="ai_last_use" maxlength="5000"></textarea>
+        </div>
+
+        <div class="q">
+          <label class="q-label" for="ai_worked">
+            What worked well, and what frustrated you?
+            <span class="hint">Skip this if you have not used any.</span>
+          </label>
+          <textarea id="ai_worked" name="ai_worked" maxlength="5000"></textarea>
+        </div>
+
+        <div class="q">
+          <label class="q-label" for="ai_change">
+            If you have not used AI, what would have to change for you to try it?
+            <span class="hint">Skip this if you already use it.</span>
+          </label>
+          <textarea id="ai_change" name="ai_change" maxlength="5000"></textarea>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Your ideas</legend>
+
+        <div class="q">
+          <label class="q-label" for="wish_tool">
+            If someone built you any tool for your real estate business, what would it do?
+          </label>
+          <textarea id="wish_tool" name="wish_tool" maxlength="5000"></textarea>
+        </div>
+
+        <div class="q">
+          <label class="q-label" for="barriers">
+            What gets in the way of using AI more, or at all?
+          </label>
+          <textarea id="barriers" name="barriers" maxlength="5000"></textarea>
+        </div>
+
+        <div class="q">
+          <label class="q-label" for="concerns">
+            Do you have any concerns about using AI in your work?
+          </label>
+          <textarea id="concerns" name="concerns" maxlength="5000"></textarea>
+        </div>
+
+        <div class="q">
+          <label class="q-label" for="paid_for_ai">
+            Have you paid for any AI tool, course or training? If so, what, and was it worth it?
+          </label>
+          <textarea id="paid_for_ai" name="paid_for_ai" maxlength="5000"></textarea>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>About you</legend>
+
+        <div class="row three q">
+          <div>
+            <label class="q-label" for="years_licensed">Years licensed</label>
+            <input type="text" id="years_licensed" name="years_licensed" maxlength="200">
+          </div>
+          <div>
+            <label class="q-label" for="deals_last_year">Deals last year (rough number)</label>
+            <input type="text" id="deals_last_year" name="deals_last_year" maxlength="200">
+          </div>
+          <div>
+            <label class="q-label" for="brokerage_size">Brokerage size (rough number of agents)</label>
+            <input type="text" id="brokerage_size" name="brokerage_size" maxlength="200">
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="check">
+            <input type="checkbox" id="followup_ok" name="followup_ok">
+            <span>I am open to a 10 minute follow-up call.</span>
+          </label>
+        </div>
+
+        <div class="row q">
+          <div>
+            <label class="q-label" for="contact_name">Name (optional)</label>
+            <input type="text" id="contact_name" name="contact_name" maxlength="200" autocomplete="name">
+          </div>
+          <div>
+            <label class="q-label" for="contact_email">Email (optional)</label>
+            <input type="email" id="contact_email" name="contact_email" maxlength="320" autocomplete="email">
+          </div>
+        </div>
+      </fieldset>
+
+      <button type="submit" id="submitBtn">Submit survey</button>
+      <p class="error" id="errorMsg" role="alert" hidden></p>
+      <p class="note">Everything is optional, but please answer as many questions as you can.</p>
+    </form>
+  </div>
+
+  <div id="doneView" class="done" hidden>
+    <h1>Thank you</h1>
+    <p>Your responses were submitted. I appreciate you taking the time.</p>
+  </div>
+
+</div>
+
+<script>
+  // ---- SETUP: paste your two Supabase values here (see README.md, step 2) ----
+  // Use the Project URL and the "anon" or "publishable" key. Never the service_role / secret key.
+  var SUPABASE_URL = "https://qcnqnnpwddycjtohjvqn.supabase.co";
+  var SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFjbnFubnB3ZGR5Y2p0b2hqdnFuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE0NTA0ODIsImV4cCI6MjEwNzAyNjQ4Mn0.SoQw9J-DgIVmt-kShD3ovyd5YMc6tlQESoOctKJw1vs";
+  // -----------------------------------------------------------------------------
+
+  var TEXT_FIELDS = [
+    "time_consuming", "tool_spend", "ai_used", "ai_tools", "ai_last_use",
+    "ai_worked", "ai_change", "wish_tool", "barriers", "concerns",
+    "paid_for_ai", "years_licensed", "deals_last_year", "brokerage_size",
+    "contact_name", "contact_email"
+  ];
+
+  var form = document.getElementById("survey");
+  var btn = document.getElementById("submitBtn");
+  var errorMsg = document.getElementById("errorMsg");
+
+  // Track where each response came from: yoursite.vercel.app/?src=jake
+  function getSource() {
+    try {
+      var s = new URLSearchParams(window.location.search).get("src");
+      return s ? s.slice(0, 100) : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function showError(msg) {
+    errorMsg.textContent = msg;
+    errorMsg.hidden = false;
+  }
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    errorMsg.hidden = true;
+
+    if (SUPABASE_URL.indexOf("PASTE_") === 0 || SUPABASE_KEY.indexOf("PASTE_") === 0) {
+      showError("This survey is not connected to its database yet. See README.md, step 2.");
+      return;
+    }
+
+    // Bots tend to fill the hidden field. Pretend success and send nothing.
+    if (form.elements["website"].value) {
+      document.getElementById("formView").hidden = true;
+      document.getElementById("doneView").hidden = false;
+      return;
+    }
+
+    var row = { source: getSource(), followup_ok: form.elements["followup_ok"].checked };
+    var answered = 0;
+    TEXT_FIELDS.forEach(function (name) {
+      var v = form.elements[name].value.trim();
+      row[name] = v === "" ? null : v;
+      if (v !== "" && name !== "contact_name" && name !== "contact_email") answered++;
+    });
+
+    if (answered === 0) {
+      showError("Please answer at least one question before submitting.");
+      return;
+    }
+
+    var email = row.contact_email;
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showError("That email address does not look right. You can also leave it blank.");
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = "Submitting...";
+
+    fetch(SUPABASE_URL.replace(/\/+$/, "") + "/rest/v1/survey_responses", {
+      method: "POST",
+      headers: {
+        "apikey": SUPABASE_KEY,
+        "Authorization": "Bearer " + SUPABASE_KEY,
+        "Content-Type": "application/json",
+        "Prefer": "return=minimal"
+      },
+      body: JSON.stringify(row)
+    }).then(function (res) {
+      if (!res.ok) {
+        throw new Error("status " + res.status);
+      }
+      document.getElementById("formView").hidden = true;
+      document.getElementById("doneView").hidden = false;
+      window.scrollTo(0, 0);
+    }).catch(function () {
+      btn.disabled = false;
+      btn.textContent = "Submit survey";
+      showError("Something went wrong and your answers were not saved. Please try again in a moment.");
+    });
+  });
+</script>
+</body>
+</html>
